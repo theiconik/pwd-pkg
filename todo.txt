@@ -1,0 +1,11 @@
+[✔] Hashing Function for hashing Master Password 
+[✔] Encryption and Decryption function for the passwords
+[✔] PostgreSQL Database for Password Savepoint
+[✔] Filtering Passwords list using specific username or email or website/organization
+[ ] Update and Delete a password from vault
+[✔] Password Generator Function
+[✔] Regex Checker for Strength of Password
+[✔] CSV Export of Passwords
+
+
+
