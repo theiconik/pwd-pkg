@@ -48,7 +48,7 @@ if entry == 1 :
 elif entry == 2 :
    # we'll do something here
    print("\n================================")
-   print("||      Existing User Login     ||")
+   print("||     Existing User Login    ||")
    print("================================\n")
    username = input("Enter username:- ")
    while check_user(username) != 1:
