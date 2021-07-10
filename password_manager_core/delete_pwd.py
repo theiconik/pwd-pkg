@@ -6,19 +6,10 @@ from dotenv import load_dotenv, find_dotenv
 
 load_dotenv(find_dotenv())
 
-def take_new_pwd():
-   pwd = input("Enter new password : ")
-   epwd = pwd.encode("utf-8")
-   key = Fernet.generate_key()
-   dkey = key.decode(encoding='UTF-8', errors='strict')
-   f = Fernet(key)
-   token = f.encrypt(epwd)
-   etoken = token.decode(encoding='UTF-8', errors='strict')
-   return [etoken, dkey]
 
-def change_pwd(username):
+def delete_pwd(username):
     print("================================")
-    print("||      Change Password       ||")
+    print("||      Delete Password       ||")
     print("================================\n")
     
     try:
@@ -50,17 +41,15 @@ def change_pwd(username):
                   
             print(myTable1)
             
-            change_row = int(input("Enter the ID of row which contains the password you wanna update:- "))
-            while change_row < 1 or change_row > len(passwords):
+            delete_row = int(input("Enter the ID of row which contains the password you wanna delete:- "))
+            while delete_row < 1 or delete_row > len(passwords):
                print("Please enter valid ID")
-               change_row = int(input("Enter the ID of row which contains the password you wanna update:- "))
+               delete_row = int(input("Enter the ID of row which contains the password you wanna delete:- "))
             
-            lst = take_new_pwd()
-            cursor.execute("UPDATE passwords SET pwd = '{}' WHERE id = {};".format(lst[0], change_row))
-            cursor.execute("UPDATE passwords SET key = '{}' WHERE id = {};".format(lst[1], change_row))
+            cursor.execute("DELETE from passwords WHERE id = {};".format(delete_row))
             connection.commit()
             print("\n*******************************************")
-            print("Password Updated successfully for ID {}".format(change_row))
+            print("Password Deleted successfully for ID {}".format(delete_row))
             print("*******************************************")
             
             postgreSQL_select_Query2 = "select * from passwords";
