@@ -11,6 +11,7 @@ from master_password_core.ms_pwd_auth import auth
 from master_password_core.change_ms_pwd import update_db_ms_pwd
 from password_manager_core.save_pwd import save_pwd
 from password_manager_core.retrieve_pwds import retrieve_pwd
+from password_manager_core.change_pwd import change_pwd
 from password_generator import passwordGenerator
 from strength_checker import printStrongNess
 from csv_export import csv_export
@@ -66,6 +67,7 @@ elif entry == 2 :
       print("4 -> Generate a password")
       print("5 -> Check Strength of a password")
       print("6 -> Export vault passwords (CSV)")
+      print("7 -> Update a vault password")
       print("0 -> Quit")
       print("==================================================================")
 
@@ -73,7 +75,7 @@ elif entry == 2 :
       if choice == 0:
          break;
       
-      while choice < 0 or choice > 6 :
+      while choice < 0 or choice > 7 :
          print("Please enter a valid choice number!")
          choice = int(input("Enter the number corresponding to your choice of action :- "))
          
@@ -101,7 +103,7 @@ elif entry == 2 :
          input_string = input("Enter password to check strength: ")
          printStrongNess(input_string)
       
-      else:
+      elif choice == 6:
          if auth(username) == 1:
             csv_export(username)
             # with zipfile.ZipFile("pwd_pkg.zip", "w") as my_zip:
@@ -113,6 +115,9 @@ elif entry == 2 :
             print("\n*******************************************")
             print("Wrong master password!")
             print("*******************************************")
+            
+      else:
+        change_pwd(username) 
    
 else:
    sys.exit("Cool!")

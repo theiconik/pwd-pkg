@@ -39,18 +39,22 @@ def change_pwd(username):
 
         else:
            # print("Print each row and it's columns values")
-            myTable1 = PrettyTable(["Username", "Email", "Password", "Website/Organization"])
+            myTable1 = PrettyTable(["ID","Username", "Email", "Password", "Website/Organization"])
             for row in passwords:
                   
                   convert = row[3].encode("utf-8")
                   f = Fernet(row[4].encode("utf-8"))
                   token = f.decrypt(convert)
                   ftoken = token.decode(encoding='UTF-8', errors='strict')
-                  myTable1.add_row([row[1], row[2], ftoken, row[5]])
+                  myTable1.add_row([row[0], row[1], row[2], ftoken, row[5]])
                   
             print(myTable1)
             
             change_row = int(input("Enter the ID of row which contains the password you wanna update:- "))
+            while change_row < 1 or change_row > len(passwords):
+               print("Please enter valid ID")
+               change_row = int(input("Enter the ID of row which contains the password you wanna update:- "))
+            
             lst = take_new_pwd()
             cursor.execute("UPDATE passwords SET pwd = '{}' WHERE id = {};".format(lst[0], change_row))
             cursor.execute("UPDATE passwords SET key = '{}' WHERE id = {};".format(lst[1], change_row))
@@ -65,14 +69,14 @@ def change_pwd(username):
             passwords = cursor.fetchall()
             
             print("Updated Table :-")
-            myTable2 = PrettyTable(["Username", "Email", "Password", "Website/Organization"])
+            myTable2 = PrettyTable(["ID","Username", "Email", "Password", "Website/Organization"])
             for row in passwords:
                   
                   convert = row[3].encode("utf-8")
                   f = Fernet(row[4].encode("utf-8"))
                   token = f.decrypt(convert)
                   ftoken = token.decode(encoding='UTF-8', errors='strict')
-                  myTable2.add_row([row[1], row[2], ftoken, row[5]])
+                  myTable2.add_row([row[0], row[1], row[2], ftoken, row[5]])
                   
             print(myTable2)
             
