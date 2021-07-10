@@ -34,6 +34,9 @@ print("====================")
 
 entry = int(input("Enter choice number:- "))
 if entry == 1 :
+   print("\n================================")
+   print("||    New User Registration   ||")
+   print("================================\n")
    username = input("Enter unique username:- ")
    while check_user(username) == 1:
       print("Username ALREADY TAKEN!")
@@ -43,6 +46,9 @@ if entry == 1 :
    
 elif entry == 2 :
    # we'll do something here
+   print("\n================================")
+   print("||      Existing User Login     ||")
+   print("================================\n")
    username = input("Enter username:- ")
    while check_user(username) != 1:
       print("Username INVALID!")

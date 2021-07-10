@@ -55,5 +55,7 @@ def rem_work (username):
       if connection:
          cursor.close()
          connection.close()
+         print("\n=============================================================================")
          print("Everything set! Now you can restart program and go with existing user!")
+         print("=============================================================================\n")
    

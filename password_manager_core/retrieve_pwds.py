@@ -47,16 +47,17 @@ def retrieve_pwd(username):
             print("No record found for that query!")
 
         # print("Print each row and it's columns values")
-        myTable = PrettyTable(["Username", "Email", "Password", "Website/Organization"])
-        for row in passwords:
-            
-            convert = row[3].encode("utf-8")
-            f = Fernet(row[4].encode("utf-8"))
-            token = f.decrypt(convert)
-            ftoken = token.decode(encoding='UTF-8', errors='strict')
-            myTable.add_row([row[1], row[2], ftoken, row[5]])
-            
-        print(myTable)
+        else:
+            myTable = PrettyTable(["Username", "Email", "Password", "Website/Organization"])
+            for row in passwords:
+                
+                convert = row[3].encode("utf-8")
+                f = Fernet(row[4].encode("utf-8"))
+                token = f.decrypt(convert)
+                ftoken = token.decode(encoding='UTF-8', errors='strict')
+                myTable.add_row([row[1], row[2], ftoken, row[5]])
+                
+            print(myTable)
             
 
     except (Exception, psycopg2.Error) as error:
